@@ -9,6 +9,12 @@
   A privacy-first AI study assistant that runs entirely in your browser.
 </p>
 
+<p align="center">
+  <a href="https://rinordana.github.io/rinote-ai/"><strong>Open Live Demo</strong></a>
+  ·
+  <a href="https://github.com/RinorDana/rinote-ai">View Source Code</a>
+</p>
+
 ![Rinote AI preview](assets/rinote-social-preview.png)
 
 ## Overview
@@ -46,7 +52,7 @@ Rinote uses a quantized DistilBART transformer through Transformers.js and ONNX 
 ### Run Locally
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/RinorDana/rinote-ai.git
 cd rinote-ai
 python3 -m http.server 8000
 ```
