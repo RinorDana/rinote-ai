@@ -49,7 +49,9 @@ Rinote uses a quantized DistilBART transformer through Transformers.js and ONNX 
 
 **Built with:** `JavaScript` · `HTML` · `CSS` · `Transformers.js` · `ONNX Runtime` · `DistilBART`
 
-### Run Locally
+### Run a Local Development Copy
+
+The public app is available at **[rinordana.github.io/rinote-ai](https://rinordana.github.io/rinote-ai/)**. Developers who want to inspect or modify the project can run their own copy:
 
 ```bash
 git clone https://github.com/RinorDana/rinote-ai.git
@@ -57,7 +59,7 @@ cd rinote-ai
 python3 -m http.server 8000
 ```
 
-Open [http://localhost:8000](http://localhost:8000).
+Then open `http://localhost:8000`. This address works only on the developer’s computer.
 
 ## Roadmap
 
