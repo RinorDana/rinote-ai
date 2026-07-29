@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Rinote AI logo</title>
+  <desc id="desc">A folded note shaped like the letter R with an AI spark.</desc>
+  <rect width="512" height="512" rx="148" fill="#123c32"/>
+  <path d="M137 116h157c78 0 126 42 126 108 0 47-25 81-68 98l78 78h-94l-65-67h-54v67h-80V116Zm80 68v84h70c33 0 51-15 51-42 0-28-18-42-51-42h-70Z" fill="#f6f4ec"/>
+  <path d="M338 116h82v82l-82-82Z" fill="#c9f178"/>
+  <path d="m390 58 9 23 23 9-23 9-9 23-9-23-23-9 23-9 9-23Z" fill="#c9f178"/>
+  <circle cx="438" cy="136" r="13" fill="#76aa72"/>
+</svg>

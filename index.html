@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Rinote AI turns class notes into summaries, flashcards, and quizzes privately in your browser."
+    />
+    <meta property="og:title" content="Rinote AI — Turn notes into knowledge" />
+    <meta property="og:description" content="A private, browser-based AI study assistant that creates summaries, flashcards, and quizzes." />
+    <meta property="og:image" content="assets/rinote-social-preview.png" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#123c32" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <title>Rinote AI — Turn notes into knowledge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Rinote AI home">
+        <img class="brand-mark" src="assets/rinote-logo.svg" alt="" />
+        <span>Rinote <em>AI</em></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <button class="nav-link active" data-view="workspace">Workspace</button>
+        <button class="nav-link" data-view="progress">Progress</button>
+        <button class="nav-link" data-view="how">How it works</button>
+      </nav>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="sun">☀</span><span class="moon">☾</span>
+      </button>
+    </header>
+
+    <main>
+      <section id="workspaceView" class="view">
+        <div class="hero">
+          <div>
+            <p class="eyebrow"><span></span> YOUR PERSONAL STUDY COMPANION</p>
+            <h1>Study smarter.<br /><span>Remember more.</span></h1>
+            <p class="hero-copy">
+              Turn messy class notes into clear summaries, useful flashcards,
+              and quick quizzes—in seconds.
+            </p>
+          </div>
+          <div class="hero-badge" aria-hidden="true">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="spark">✦</div>
+            <span class="float-chip chip-one">Aa</span>
+            <span class="float-chip chip-two">✓</span>
+            <span class="float-chip chip-three">?</span>
+          </div>
+        </div>
+
+        <section class="workspace-grid">
+          <article class="card input-card">
+            <div class="card-heading">
+              <div>
+                <p class="step">STEP 01</p>
+                <h2>Add your notes</h2>
+              </div>
+              <button class="text-button" id="sampleButton">Try sample</button>
+            </div>
+            <label class="session-field" for="sessionName">
+              <span>Course or topic <small>OPTIONAL</small></span>
+              <input
+                id="sessionName"
+                type="text"
+                maxlength="60"
+                autocomplete="off"
+                placeholder="e.g. Biology — Photosynthesis"
+              />
+            </label>
+            <div class="ai-control">
+              <div class="ai-control-copy">
+                <span class="ai-dot">✦</span>
+                <div>
+                  <strong>Browser AI</strong>
+                  <small>Real transformer model · runs privately on your device</small>
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="aiMode" checked />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+            <textarea
+              id="notesInput"
+              maxlength="12000"
+              placeholder="Paste your class notes here...&#10;&#10;Tip: A few paragraphs with clear facts work best."
+            ></textarea>
+            <div class="file-drop" id="fileDrop">
+              <input type="file" id="fileInput" accept=".txt,text/plain" hidden />
+              <div class="file-drop-icon">↓</div>
+              <div class="file-drop-copy">
+                <strong id="fileDropTitle">Drop a .txt file here</strong>
+                <span id="fileDropHint">or click to browse · maximum 1 MB</span>
+              </div>
+              <button class="browse-button" id="browseButton" type="button">Choose file</button>
+            </div>
+            <div class="input-status hidden" id="inputStatus" role="alert">
+              <span class="status-icon" id="statusIcon">!</span>
+              <div>
+                <strong id="statusTitle">Add a little more detail</strong>
+                <p id="statusMessage"></p>
+              </div>
+              <button id="dismissStatus" type="button" aria-label="Dismiss message">×</button>
+            </div>
+            <div class="input-footer">
+              <span id="wordCount">0 words</span>
+              <button class="primary-button" id="generateButton">
+                <span>Generate study kit</span><b>✦</b>
+              </button>
+            </div>
+          </article>
+
+          <article class="card output-card" id="outputCard">
+            <div class="empty-state" id="emptyState">
+              <div class="empty-icon"><span>✦</span></div>
+              <p class="step">YOUR STUDY KIT</p>
+              <h2>Ready when you are</h2>
+              <p>Add your notes and we’ll transform them into everything you need to study.</p>
+              <div class="feature-pills">
+                <span>≡ Summary</span><span>◇ Flashcards</span><span>✓ Quiz</span>
+              </div>
+            </div>
+
+            <div class="results hidden" id="results">
+              <div class="results-top">
+                <div>
+                  <p class="step">YOUR STUDY KIT <span class="model-badge" id="modelBadge">AI GENERATED</span></p>
+                  <h2 id="kitTitle">New study session</h2>
+                </div>
+                <span class="saved-label">✓ Saved locally</span>
+              </div>
+              <div class="tabs" role="tablist">
+                <button class="tab active" data-tab="summary">Summary</button>
+                <button class="tab" data-tab="flashcards">Flashcards</button>
+                <button class="tab" data-tab="quiz">Quiz</button>
+              </div>
+              <div class="export-bar">
+                <span><b>↓</b> Export study kit</span>
+                <div>
+                  <button class="export-button" id="exportSummary" type="button">Summary</button>
+                  <button class="export-button" id="exportFlashcards" type="button">Flashcards</button>
+                </div>
+              </div>
+              <div class="result-notice hidden" id="resultNotice">
+                <span>i</span>
+                <p><strong id="resultNoticeTitle"></strong><small id="resultNoticeMessage"></small></p>
+              </div>
+              <div class="tab-panel" id="summaryPanel">
+                <div class="stat-row">
+                  <div><strong id="readingTime">1</strong><span>min read</span></div>
+                  <div><strong id="topicCount">0</strong><span>key topics</span></div>
+                  <div><strong id="cardCount">0</strong><span>flashcards</span></div>
+                </div>
+                <h3>Key takeaways</h3>
+                <ul class="summary-list" id="summaryList"></ul>
+                <h3>Important topics</h3>
+                <div class="topic-list" id="topicList"></div>
+              </div>
+              <div class="tab-panel hidden" id="flashcardsPanel">
+                <div class="mastery-header">
+                  <div>
+                    <span>SESSION MASTERY</span>
+                    <strong id="masteryPercent">0%</strong>
+                  </div>
+                  <small id="masteryDetail">0 of 0 cards mastered</small>
+                </div>
+                <div class="mastery-track"><span id="masteryProgress"></span></div>
+                <div class="flashcard-toolbar">
+                  <p class="panel-hint">Flip the card, then rate how well you knew it.</p>
+                  <div>
+                    <button id="editCard" type="button">✎ Edit</button>
+                    <button id="deleteCard" class="delete-card-button" type="button">⌫ Delete</button>
+                  </div>
+                </div>
+                <div class="flashcard" id="flashcard" tabindex="0">
+                  <span id="cardSide">QUESTION</span>
+                  <p id="flashcardText"></p>
+                  <small>Click to flip</small>
+                </div>
+                <form class="card-editor hidden" id="cardEditor">
+                  <div class="editor-heading">
+                    <div><span>EDIT FLASHCARD</span><strong id="editorCardNumber">Card 1</strong></div>
+                    <button id="cancelEdit" type="button" aria-label="Close editor">×</button>
+                  </div>
+                  <label>
+                    Question
+                    <textarea id="editQuestion" maxlength="300" required></textarea>
+                  </label>
+                  <label>
+                    Answer
+                    <textarea id="editAnswer" maxlength="1200" required></textarea>
+                  </label>
+                  <div class="editor-actions">
+                    <button id="cancelEditBottom" type="button">Cancel</button>
+                    <button class="save-card-button" type="submit">Save changes</button>
+                  </div>
+                </form>
+                <div class="rating-controls">
+                  <button class="study-again-button" id="studyAgain" type="button"><span>↻</span> Study again</button>
+                  <button class="got-it-button" id="gotIt" type="button"><span>✓</span> Got it</button>
+                </div>
+                <div class="card-controls">
+                  <button id="prevCard" aria-label="Previous card">←</button>
+                  <span id="cardPosition">1 / 1</span>
+                  <button id="nextCard" aria-label="Next card">→</button>
+                </div>
+              </div>
+              <div class="tab-panel hidden" id="quizPanel">
+                <div id="quizContent">
+                  <div class="quiz-meta"><span id="questionNumber">Question 1</span><span id="quizScore">0 correct</span></div>
+                  <div class="progress-line"><span id="quizProgress"></span></div>
+                  <h3 id="quizQuestion"></h3>
+                  <div class="answers" id="quizAnswers"></div>
+                </div>
+                <div class="quiz-finish hidden" id="quizFinish">
+                  <div class="score-ring"><strong id="finalScore">0%</strong><span>SCORE</span></div>
+                  <h3>Session complete!</h3>
+                  <p id="scoreMessage"></p>
+                  <button class="primary-button" id="retryQuiz">Try again</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="privacy-section" aria-labelledby="privacyTitle">
+          <div class="privacy-lock" aria-hidden="true">
+            <span></span>
+            <div>✓</div>
+          </div>
+          <div class="privacy-copy">
+            <p class="eyebrow"><span></span> PRIVACY BY DESIGN</p>
+            <h2 id="privacyTitle">Your notes stay on your device.</h2>
+            <p>
+              Rinote does not send your notes to OpenAI or another paid AI API.
+              The model runs locally in your browser, and study history is stored
+              only in your browser’s local storage.
+            </p>
+          </div>
+          <div class="privacy-points">
+            <span><b>✓</b> No account required</span>
+            <span><b>✓</b> No notes database</span>
+            <span><b>✓</b> No API key</span>
+            <span><b>✓</b> Clear data anytime</span>
+          </div>
+        </section>
+      </section>
+
+      <section id="howView" class="view hidden">
+        <section class="how-it-works how-standalone" aria-labelledby="howItWorksTitle">
+          <div class="section-intro">
+            <div>
+              <p class="eyebrow"><span></span> HOW IT WORKS</p>
+              <h1 id="howItWorksTitle">From raw notes to a <span>focused study kit.</span></h1>
+            </div>
+            <p>
+              Rinote combines an on-device transformer with lightweight natural-language
+              processing to turn your material into useful study tools.
+            </p>
+          </div>
+          <div class="process-grid">
+            <article class="process-card">
+              <span class="process-number">01</span>
+              <div class="process-icon">Aa</div>
+              <h3>Add your notes</h3>
+              <p>Paste your material or import a .txt file. The text is cleaned and prepared directly in your browser.</p>
+            </article>
+            <article class="process-card">
+              <span class="process-number">02</span>
+              <div class="process-icon">✦</div>
+              <h3>Let AI analyze</h3>
+              <p>A DistilBART transformer creates the summary while local NLP identifies recurring topics and key facts.</p>
+            </article>
+            <article class="process-card">
+              <span class="process-number">03</span>
+              <div class="process-icon">✓</div>
+              <h3>Study and improve</h3>
+              <p>Practice with editable flashcards and quizzes, track mastery, then export your personalized study kit.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="technology-strip">
+          <div><span>MODEL</span><strong>DistilBART</strong></div>
+          <div><span>RUNTIME</span><strong>Transformers.js + ONNX</strong></div>
+          <div><span>PROCESSING</span><strong>100% in your browser</strong></div>
+          <div><span>COST</span><strong>No paid API</strong></div>
+        </section>
+      </section>
+
+      <section id="progressView" class="view hidden">
+        <div class="progress-header">
+          <p class="eyebrow"><span></span> YOUR LEARNING JOURNEY</p>
+          <h1>Small steps, <span>big progress.</span></h1>
+          <p>Everything is saved privately in your browser.</p>
+        </div>
+        <div class="dashboard-stats">
+          <article class="metric-card"><span>STUDY SESSIONS</span><strong id="totalSessions">0</strong><small>kits generated</small></article>
+          <article class="metric-card"><span>QUIZZES TAKEN</span><strong id="totalQuizzes">0</strong><small>completed quizzes</small></article>
+          <article class="metric-card accent"><span>AVERAGE SCORE</span><strong id="averageScore">—</strong><small>across all quizzes</small></article>
+        </div>
+        <article class="card history-card">
+          <div class="card-heading">
+            <div><p class="step">RECENT ACTIVITY</p><h2>Your study sessions</h2></div>
+            <button class="text-button danger" id="clearHistory">Clear history</button>
+          </div>
+          <div id="historyList" class="history-list"></div>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand" href="#"><img class="brand-mark" src="assets/rinote-logo.svg" alt="" /><span>Rinote <em>AI</em></span></a>
+      <p>Learn at your pace. Your notes never leave your browser.</p>
+      <span>Built with curiosity ✦</span>
+    </footer>
+
+    <div class="toast" id="toast" role="status"></div>
+    <div class="history-preview-overlay hidden" id="historyPreview" role="dialog" aria-modal="true" aria-labelledby="historyPreviewTitle">
+      <div class="history-preview-card">
+        <div class="history-preview-top">
+          <div>
+            <p class="step">SAVED STUDY KIT</p>
+            <h2 id="historyPreviewTitle">Study session</h2>
+            <span id="historyPreviewMeta"></span>
+          </div>
+          <button id="closeHistoryPreview" type="button" aria-label="Close saved study kit">×</button>
+        </div>
+        <div class="history-preview-content" id="historyPreviewContent"></div>
+        <div class="history-preview-actions">
+          <button id="closeHistoryPreviewBottom" type="button">Close</button>
+          <button class="primary-button" id="restoreHistorySession" type="button">Open in workspace <b>→</b></button>
+        </div>
+      </div>
+    </div>
+    <div class="confirm-overlay hidden" id="historyConfirm" role="dialog" aria-modal="true" aria-labelledby="historyConfirmTitle">
+      <div class="confirm-card">
+        <div class="confirm-icon">!</div>
+        <p class="step">PERMANENT ACTION</p>
+        <h2 id="historyConfirmTitle">Delete all study history?</h2>
+        <p id="historyConfirmMessage">
+          This permanently removes your saved study sessions, completed quiz count,
+          and average scores from this browser. You can’t get this data back.
+        </p>
+        <div class="confirm-actions">
+          <button id="cancelHistoryDelete" type="button">Cancel</button>
+          <button class="permanent-delete-button" id="confirmHistoryDelete" type="button">Delete permanently</button>
+        </div>
+      </div>
+    </div>
+    <div class="onboarding hidden" id="onboarding" role="dialog" aria-modal="true" aria-labelledby="onboardingTitle">
+      <div class="onboarding-card">
+        <div class="onboarding-top">
+          <a class="brand" href="#" tabindex="-1">
+            <img class="brand-mark" src="assets/rinote-logo.svg" alt="" />
+            <span>Rinote <em>AI</em></span>
+          </a>
+          <button id="skipOnboarding" type="button">Skip</button>
+        </div>
+        <div class="onboarding-visual" id="onboardingVisual" aria-hidden="true">
+          <span class="visual-main">01</span>
+          <i>✦</i><b>Aa</b><em>✓</em>
+        </div>
+        <p class="step" id="onboardingStep">STEP 1 OF 3</p>
+        <h2 id="onboardingTitle">Bring your notes</h2>
+        <p class="onboarding-copy" id="onboardingCopy">
+          Paste your class notes or drop in a .txt file. Everything stays private in your browser.
+        </p>
+        <div class="onboarding-footer">
+          <div class="onboarding-dots" aria-label="Onboarding progress">
+            <span class="active"></span><span></span><span></span>
+          </div>
+          <div class="onboarding-actions">
+            <button class="onboarding-back hidden" id="onboardingBack" type="button">Back</button>
+            <button class="primary-button" id="onboardingNext" type="button">Next <b>→</b></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="model-loader hidden" id="modelLoader" role="status" aria-live="polite">
+      <div class="loader-card">
+        <div class="loader-icon">✦</div>
+        <p class="step">ON-DEVICE AI</p>
+        <h2 id="loaderTitle">Loading the AI model</h2>
+        <p id="loaderMessage">Preparing a private transformer model in your browser…</p>
+        <div class="model-progress"><span id="modelProgress"></span></div>
+        <small id="loaderPercent">Starting…</small>
+        <p class="loader-note">The first run takes longer. Your browser caches the model for next time.</p>
+      </div>
+    </div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

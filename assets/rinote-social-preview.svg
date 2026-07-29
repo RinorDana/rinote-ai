@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Rinote AI social preview</title>
+  <desc id="desc">Rinote AI turns notes into knowledge with private, browser-based AI.</desc>
+  <rect width="1200" height="630" fill="#f4f2ea"/>
+  <circle cx="1065" cy="70" r="290" fill="#e4f7b4"/>
+  <circle cx="80" cy="640" r="250" fill="#dcebe2"/>
+  <path d="M0 0h1200v14H0z" fill="#c9f178"/>
+  <g transform="translate(92 97)">
+    <rect width="120" height="120" rx="35" fill="#123c32"/>
+    <path d="M30 26h39c20 0 33 11 33 28 0 11-6 20-17 24l20 20H82L66 81H50v17H30V26Zm20 17v21h17c9 0 13-4 13-10s-4-11-13-11H50Z" fill="#f6f4ec"/>
+    <path d="m93 12 4 10 10 4-10 4-4 10-4-10-10-4 10-4 4-10Z" fill="#c9f178"/>
+  </g>
+  <text x="242" y="160" fill="#123c32" font-family="Arial, sans-serif" font-size="62" font-weight="800" letter-spacing="-2">Rinote <tspan fill="#5f9364">AI</tspan></text>
+  <text x="92" y="330" fill="#15271f" font-family="Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="-3">Turn notes into</text>
+  <text x="92" y="410" fill="#5f9364" font-family="Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="-3">knowledge.</text>
+  <text x="96" y="480" fill="#66736c" font-family="Arial, sans-serif" font-size="25">Private, browser-based AI summaries, flashcards, and quizzes.</text>
+  <g transform="translate(96 535)">
+    <rect width="205" height="45" rx="22" fill="#123c32"/>
+    <text x="22" y="29" fill="#f6f4ec" font-family="Arial, sans-serif" font-size="16" font-weight="700">NO PAID API</text>
+    <circle cx="172" cy="22" r="5" fill="#c9f178"/>
+    <circle cx="188" cy="22" r="5" fill="#76aa72"/>
+  </g>
+  <g transform="translate(870 214) rotate(6)">
+    <rect width="215" height="250" rx="42" fill="#123c32"/>
+    <path d="M54 55h82c43 0 69 23 69 59 0 25-14 44-37 53l43 43h-52l-35-37H96v37H54V55Zm42 37v46h38c18 0 28-8 28-23s-10-23-28-23H96Z" fill="#f6f4ec"/>
+    <path d="M160 55h45v45l-45-45Z" fill="#c9f178"/>
+    <path d="m190 5 6 16 16 6-16 6-6 16-6-16-16-6 16-6 6-16Z" fill="#c9f178"/>
+  </g>
+</svg>
